@@ -23,6 +23,7 @@ DynamicAtlasManager.instance.maxFrameSize = 512;
 @ccclass('Main')
 export class Main extends Root {
     start() {
+
         if (DEBUG) profiler.showStats();
     }
 
