@@ -6,7 +6,7 @@
  */
 
 import { Node, tween, Vec3 } from "cc";
-import { PopViewParams } from "../../../../../extensions/oops-plugin-framework/assets/core/gui/layer/Defines";
+import { UICallbacks } from "../../../../../extensions/oops-plugin-framework/assets/core/gui/layer/Defines";
 import { oops } from "../../../../../extensions/oops-plugin-framework/assets/core/Oops";
 import { UIID } from "../config/GameUIConfig";
 
@@ -26,7 +26,7 @@ class TipsManager {
             },
             needCancel: true
         };
-        oops.gui.open(UIID.Window, operate, this.getPopCommonEffect());
+        oops.gui.open(UIID.Confirm, operate, this.getPopCommonEffect());
     }
 
     alert(content: string, cb?: Function, title?: string, okWord?: string) {
@@ -39,7 +39,7 @@ class TipsManager {
             },
             needCancel: false
         };
-        oops.gui.open(UIID.Window, operate, tips.getPopCommonEffect());
+        oops.gui.open(UIID.Confirm, operate, tips.getPopCommonEffect());
     }
 
     confirm(content: string, cb: Function, okWord: string = "common_prompt_ok") {
@@ -56,12 +56,12 @@ class TipsManager {
             },
             needCancel: true
         };
-        oops.gui.open(UIID.Window, operate, tips.getPopCommonEffect());
+        oops.gui.open(UIID.Confirm, operate, tips.getPopCommonEffect());
     }
 
     /** 弹窗动画 */
-    private getPopCommonEffect(callbacks?: PopViewParams) {
-        let newCallbacks: PopViewParams = {
+    private getPopCommonEffect(callbacks?: UICallbacks) {
+        let newCallbacks: UICallbacks = {
             // 节点添加动画
             onAdded: (node, params) => {
                 node.setScale(0.1, 0.1, 0.1);
@@ -74,7 +74,9 @@ class TipsManager {
             onBeforeRemove: (node, next) => {
                 tween(node)
                     .to(0.2, { scale: new Vec3(0.1, 0.1, 0.1) })
-                    .call(next)
+                    .call((target, data) => {
+                        next();
+                    })
                     .start();
             },
         }
