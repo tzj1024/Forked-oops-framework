@@ -14,6 +14,7 @@ import { UIID } from "../../common/config/GameUIConfig";
 import { smc } from "../../common/ecs/SingletonModuleComp";
 import { TableRoleJob } from "../../common/table/TableRoleJob";
 import { TableRoleLevelUp } from "../../common/table/TableRoleLevelUp";
+import { Logger } from "../../../../../extensions/oops-plugin-framework/assets/core/common/log/Logger";
 
 const { ccclass, property } = _decorator;
 
@@ -37,11 +38,12 @@ export class LoadingViewComp extends CCVMParentComp {
 
     reset(): void {
         setTimeout(() => {
+            Logger.logView('LoadingView onComplete')
             // 关闭加载界面
             oops.gui.remove(UIID.Loading);
 
             // 打开游戏主界面（自定义逻辑）
-            oops.gui.open(UIID.Demo);
+            oops.gui.open(UIID.Hall);
         }, 500);
     }
 

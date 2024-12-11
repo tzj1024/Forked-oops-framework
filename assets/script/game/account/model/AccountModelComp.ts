@@ -8,6 +8,7 @@
  */
 
 import { ecs } from "../../../../../extensions/oops-plugin-framework/assets/libs/ecs/ECS";
+import { HallViewComp } from "../../hall/view/HallView";
 import { Role } from "../../role/Role";
 
 /** 

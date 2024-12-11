@@ -6,6 +6,7 @@
  */
 import { ecs } from "../../../../../extensions/oops-plugin-framework/assets/libs/ecs/ECS";
 import { VM } from "../../../../../extensions/oops-plugin-framework/assets/libs/model-view/ViewModel";
+import { RoleModelPath, RoleModelType } from "../RoleConstants";
 import { RoleNumeric } from "./attribute/RoleNumeric";
 import { RoleNumericMap } from "./attribute/RoleNumericMap";
 import { RoleAttributeType } from "./RoleEnum";
@@ -36,6 +37,11 @@ export class RoleModelComp extends ecs.Comp {
         this.vm.name = value;
     }
 
+    roleModelType: RoleModelType = RoleModelType.Tank
+    get roleModelPath(): string {
+        return RoleModelPath[this.roleModelType];
+    }
+
     /** 动画名资源 */
     anim: string = "model1";
 
@@ -57,6 +63,8 @@ export class RoleModelComp extends ecs.Comp {
     vmRemove() {
         VM.remove("Role");
     }
+
+
 
     reset() {
         this.vmRemove();

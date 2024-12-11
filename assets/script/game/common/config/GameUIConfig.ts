@@ -23,7 +23,10 @@ export enum UIID {
     MainUI_Switch,
     Pop1,
     Pop2,
-    Dialog
+    Dialog,
+
+    /**大厅 */
+    Hall,
 }
 
 /** 打开界面方式的配置数据 */
@@ -38,4 +41,6 @@ export var UIConfigData: { [key: number]: UIConfig } = {
     [UIID.Pop1]: { layer: LayerType.PopUp, prefab: "demo/Pop1" },
     [UIID.Pop2]: { layer: LayerType.PopUp, prefab: "demo/Pop2" },
     [UIID.Dialog]: { layer: LayerType.Dialog, prefab: "demo/Dialog" },
+
+    [UIID.Hall]: { layer: LayerType.UI, prefab: "gui/prefab/hall/hall" },
 }

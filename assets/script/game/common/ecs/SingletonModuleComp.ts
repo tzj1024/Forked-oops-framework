@@ -8,6 +8,7 @@
 import { ecs } from "../../../../../extensions/oops-plugin-framework/assets/libs/ecs/ECS";
 import { Account } from "../../account/Account";
 import { Initialize } from "../../initialize/Initialize";
+import { GameMap } from "../../map/gameMap/GameMap";
 
 /** 游戏模块 */
 @ecs.register('SingletonModule')
@@ -18,6 +19,11 @@ export class SingletonModuleComp extends ecs.Comp {
     get account(): Account {
         return this.initialize.account;
     }
+
+    /**地图模块 */
+    gameMap: GameMap = null!;
+
+
 
     reset() { }
 }

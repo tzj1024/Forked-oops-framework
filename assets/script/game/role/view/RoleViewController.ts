@@ -17,21 +17,30 @@ export class RoleViewController extends Component {
     /** 角色对象 */
     role: Role = null!;
 
+    @property(Node)
+    joystick: Node = null!;
+
+
+
+
     onLoad() {
+        oops.gui.game.on(Node.EventType.TOUCH_END, this.onTouchEnd, this);
+        oops.gui.game.on(Node.EventType.TOUCH_END, this.onTouchEnd, this);
+        oops.gui.game.on(Node.EventType.TOUCH_END, this.onTouchEnd, this);
         oops.gui.game.on(Node.EventType.TOUCH_END, this.onTouchEnd, this);
     }
 
     private onTouchEnd(event: EventTouch) {
         // 注：角色移动控制代码在RPG类游戏中，应该设计到地图模块监听触摸事件。因为测试代码只有一个角色，为了简少DEMO代码量，只表达程序设计思想
-        var uit = this.node.parent!.getComponent(UITransform)!;
-        var x = event.getUILocation().x - uit.contentSize.width / 2;
-        var y = event.getUILocation().y - uit.contentSize.height / 2;
-        this.role.move(v3(x, y));
+        // var uit = this.node.parent!.getComponent(UITransform)!;
+        // var x = event.getUILocation().x - uit.contentSize.width / 2;
+        // var y = event.getUILocation().y - uit.contentSize.height / 2;
+        // this.role.move(v3(x, y));
 
-        if (x < this.role.RoleView.node.position.x)
-            this.role.RoleView.animator.left();
-        else
-            this.role.RoleView.animator.right();
+        // if (x < this.role.RoleView.node.position.x)
+        //     this.role.RoleView.animator.left();
+        // else
+        //     this.role.RoleView.animator.right();
     }
 
     onDestroy() {

@@ -74,25 +74,26 @@ export class AccountNetDataSystem extends ecs.ComblockSystem implements ecs.IEnt
         role.RoleModel.name = data.name;
 
         // 角色初始战斗属性
-        role.RoleModelBase.power = data.power;
-        role.RoleModelBase.agile = data.agile;
-        role.RoleModelBase.physical = data.physical;
+        // role.RoleModelBase.power = data.power;
+        // role.RoleModelBase.agile = data.agile;
+        // role.RoleModelBase.physical = data.physical;
 
         // 角色等级数据
         role.upgrade(data.lv);
 
+        /*         
         // 角色职业数据
         role.RoleModelJob.id = data.jobId;
-
         // 角色基础属性绑定到界面上显示
         role.RoleModel.vmAdd();
         // 角色等级属性绑定到界面上显示
         role.RoleModelLevel.vmAdd();
         // 角色初始基础属性绑定到界面上显示
         role.RoleModelBase.vmAdd();
+         */
 
         // 角色动画显示对象
-        role.load(oops.gui.game, v3(0, -300, 0));
+        // role.load(oops.gui.game, v3(0, -300, 0));
 
         e.AccountModel.role = role;
     }

@@ -18,6 +18,10 @@ import { RoleModelJobComp } from "./model/RoleModelJobComp";
 import { RoleModelLevelComp } from "./model/RoleModelLevelComp";
 import { RoleViewComp } from "./view/RoleViewComp";
 import { RoleViewInfoComp } from "./view/RoleViewInfoComp";
+import { smc } from "../common/ecs/SingletonModuleComp";
+import { RoleModelType } from "./RoleConstants";
+import { RoleViewTankComp } from "./view/roleModel/RoleViewTank";
+import { RoleViewWarriorComp } from "./view/roleModel/RoleViewWarrior";
 
 /** 
  * 角色实体 
@@ -37,13 +41,13 @@ export class Role extends ecs.Entity {
     RoleModelLevel!: RoleModelLevelComp;
 
     // 业务层
-    RoleChangeJob!: RoleChangeJobComp;          // 转职
+    // RoleChangeJob!: RoleChangeJobComp;          // 转职
     RoleUpgrade!: RoleUpgradeComp;              // 升级
     RoleMoveTo!: MoveToComp;                    // 移动
 
     // 视图层
     RoleView!: RoleViewComp;                    // 动画
-    RoleViewInfo!: RoleViewInfoComp;            // 属性界面
+    // RoleViewInfo!: RoleViewInfoComp;            // 属性界面
 
     protected init() {
         // 初始化实体常住 ECS 组件，定义实体特性
@@ -82,18 +86,29 @@ export class Role extends ecs.Entity {
 
     /** 加载角色显示对象（cc.Component在创建后，添加到ECS框架中，使实体上任何一个ECS组件都可以通过 ECS API 获取到视图层对象 */
     load(parent: Node, pos: Vec3 = Vec3.ZERO) {
-        var node = ViewUtil.createPrefabNode("game/battle/role");
-        var mv = node.getComponent(RoleViewComp)!;
-        this.add(mv);
+
+        var node = ViewUtil.createPrefabNode(this.RoleModel.roleModelPath);
+        var mv
+        switch (this.RoleModel.roleModelType) {
+            case RoleModelType.Tank:
+                mv = node.getComponent(RoleViewTankComp)!;
+                break;
+            case RoleModelType.MechWarrior:
+                mv = node.getComponent(RoleViewWarriorComp)!;
+                break;
+            default:
+                break;
+        }
+        this.add(mv as ecs.IComp);
 
         node.parent = parent;
         node.setPosition(pos);
     }
 
     /** 攻击（DEMO没有战斗逻辑，所以只播放一个动画） */
-    attack() {
-        this.RoleView.animator.setTrigger(RoleAnimatorType.Attack);
-    }
+    // attack() {
+    //     this.RoleView.animator.setTrigger(RoleAnimatorType.Attack);
+    // }
 }
 
 // export class EcsRoleSystem extends ecs.System {

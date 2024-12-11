@@ -20,13 +20,13 @@ const { ccclass, property } = _decorator;
 @ccclass('RoleViewComp')                   // 定义为 Cocos Creator 组件
 @ecs.register('RoleView', false)           // 定义为 ECS 组件
 export class RoleViewComp extends CCComp {
-    @property({ type: sp.Skeleton, tooltip: '角色动画' })
-    spine: sp.Skeleton = null!;
+    // @property({ type: sp.Skeleton, tooltip: '角色动画' })
+    // spine: sp.Skeleton = null!;
 
     /** 角色动画资源管理 */
     loader: RoleViewLoader = null!;
-    /** 角色动画规则管理 */
-    animator: RoleViewAnimator = null!;
+    // /** 角色动画规则管理 */
+    // animator: RoleViewAnimator = null!;
     /** 角色控制器 */
     controller: RoleViewController = null!;
 
@@ -37,8 +37,8 @@ export class RoleViewComp extends CCComp {
         this.loader = this.node.addComponent(RoleViewLoader);
         this.node.emit("load", role);
 
-        this.animator = this.spine.getComponent(RoleViewAnimator)!;
-        this.animator.role = role;
+        // this.animator = this.spine.getComponent(RoleViewAnimator)!;
+        // this.animator.role = role;
 
         this.controller = this.node.addComponent(RoleViewController);
         this.controller.role = role;
@@ -50,7 +50,7 @@ export class RoleViewComp extends CCComp {
     private onHandler(event: string, args: any) {
         switch (event) {
             case RoleEvent.ChangeJob:
-                this.animator.refresh();
+                // this.animator.refresh();
                 break;
         }
     }
